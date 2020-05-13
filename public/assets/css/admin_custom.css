@@ -1,0 +1,40 @@
+.content-header h1 {
+	padding: 20px;
+}
+.box {
+	background: #fff;
+	padding: 20px !important;
+}
+.box-container {
+	padding: 20px !important;
+}
+.box-title {
+	margin-bottom: 15px;
+}
+.box-title > h3 {
+	color: #000;
+	font-size: 20px;
+	text-transform: capitalize;
+}
+.box-add {
+	margin-bottom: 50px;
+}
+.box-add > a {
+	text-transform: capitalize;
+	background: #007bff;
+	padding: 10px 15px;
+	color: #fff;
+	border-radius: 3px;
+}
+.box-add > a > i {
+	margin-left: 10px;
+}
+.box-table > h5 {
+	text-align: center;
+}
+.box-table table {
+	border: 1px solid #ddd;
+}
+.box-table table > thead > tr > td {
+	text-transform: capitalize;
+}
