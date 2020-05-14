@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 {{-- resources/views/admin/dashboard.blade.php --}}
->>>>>>> kennt-update
 @extends('adminlte::page')
 @section('title', 'Dashboard')
 @section('content_header')
