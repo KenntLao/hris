@@ -210,33 +210,6 @@ return [
     'menu' => [
         'MAIN NAVIGATION',
         [
-<<<<<<< Updated upstream
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'Dashboard',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-tachometer-alt',
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-=======
             'text' => 'Pages',
             'url' => 'admin/pages',
             'icon' => 'fas fa-fw fa-file'
@@ -316,7 +289,6 @@ return [
                     'icon_color' => 'green'
                 ],
             ],
->>>>>>> Stashed changes
         ],
     ],
 

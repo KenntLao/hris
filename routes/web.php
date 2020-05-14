@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< Updated upstream
-=======
 /* JOB POSITIONS PAGE */
 Route::resource('recruitment/jobPositions', 'JobPositionController');
 Route::post('recruitment/jobPositions/create', 'JobPositionController@store');
@@ -51,7 +49,6 @@ Route::get('recruitment/experienceLevels/{employmentTypes}/edit', 'ExperienceLev
 Route::resource('recruitment/jobFunctions', 'JobFunctionController');
 Route::post('recruitment/jobFunctions/create', 'JobFunctionController@store');
 Route::get('recruitment/jobFunctions/{employmentTypes}/edit', 'JobFunctionController@edit');
->>>>>>> Stashed changes
 
 Route::get('/', function () {
     return view('welcome');
