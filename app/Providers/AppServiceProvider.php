@@ -3,9 +3,18 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
 use Illuminate\Contracts\Events\Dispatcher;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
+>>>>>>> kennt-update
 
+=======
+use Illuminate\Contracts\Events\Dispatcher;
+use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
+use Illuminate\Support\Facades\Schema;
+>>>>>>> Stashed changes
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +34,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $events)
     {
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+        //
+=======
+        Schema::defaultStringLength(191);
+        
+>>>>>>> Stashed changes
+=======
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
             $event->menu->add([
                 'text'        => 'Dashboard',
@@ -67,5 +84,6 @@ class AppServiceProvider extends ServiceProvider
                 'icon' => 'fas fa-fw fa-lock',
             ]);
         });
+>>>>>>> kennt-update
     }
 }
