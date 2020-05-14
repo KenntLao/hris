@@ -210,7 +210,6 @@ return [
     'menu' => [
         'MAIN NAVIGATION',
         [
-<<<<<<< HEAD
             'text' => 'Pages',
             'url' => 'admin/pages',
             'icon' => 'fas fa-fw fa-file'
@@ -291,12 +290,6 @@ return [
                 ],
             ],
         ],
-=======
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ]
->>>>>>> kennt-update
     ],
 
     /*
