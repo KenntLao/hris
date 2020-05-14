@@ -208,11 +208,88 @@ return [
     */
 
     'menu' => [
+        'MAIN NAVIGATION',
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ]
+            'text' => 'Pages',
+            'url' => 'admin/pages',
+            'icon' => 'fas fa-fw fa-file'
+        ],
+        'EMPLOYEE MANAGEMENT',
+        [
+            'text'    => 'Employees',
+            'icon'    => 'fas fa-fw fa-users',
+            'icon_color' => 'yellow',
+            'submenu' => [
+                [
+                    'text' => 'Employees',
+                    'url'  => '/pages/employees/employee',
+                    'icon'    => 'fas fa-fw fa-users',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => 'Employee History',
+                    'url'  => '/pages/employee/employee_history/',
+                    'icon'    => 'fas fa-fw fa-history',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => 'HR Form',
+                    'url'  => '/pages/employee/hr_form/',
+                    'icon'    => 'fas fa-fw fa-folder',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => 'Itenerary Request',
+                    'url'  => '/pages/employee/itenerary_request/',
+                    'icon'    => 'fas fa-fw fa-plane-departure',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => 'Monitor Attendance',
+                    'url'  => '/pages/employee/monitor_attendance/',
+                    'icon'    => 'fas fa-fw fa-clock',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => 'Performance Review',
+                    'url'  => '/pages/employee/performance_review/',
+                    'icon'    => 'fas fa-fw fa-chart-bar',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => 'Document Management',
+                    'url'  => '/pages/employee/document_management/',
+                    'icon'    => 'fas fa-fw fa-file',
+                    'icon_color' => 'yellow'
+                ],
+            ],
+        ],
+        'RECRUITMENT MANAGEMENT',
+        [
+            'text'    => 'Recruitment',
+            'icon' => 'fas fa-fw fa-random',
+            'icon_color' => 'green',
+            'submenu' => [
+                [
+                    'text' => 'Recruitment Setup',
+                    'url'  => 'recruitment/recruitmentSetup/',
+                    'icon'    => 'fas fa-fw fa-users',
+                    'icon_color' => 'green'
+                ],
+                [
+                    'text' => 'Job Positions',
+                    'url'  => 'recruitment/jobPositions/',
+                    'icon' => 'fas fa-fw fa-columns',
+                    'icon_color' => 'green'
+                ],
+                [
+                    'text' => 'Candidates',
+                    'url'  => 'recruitment/candidates/',
+                    'icon' => 'fas fa-fw fa-users',
+                    'icon_color' => 'green'
+                ],
+            ],
+        ],
     ],
 
     /*
