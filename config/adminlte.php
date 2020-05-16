@@ -47,7 +47,7 @@ return [
 
     'logo' => '<b>Admin</b>LTE',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_class' => 'brand-image img-circle elevation-1',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AdminLTE',
@@ -105,7 +105,7 @@ return [
     'classes_brand_text' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand-md',
@@ -208,32 +208,102 @@ return [
     */
 
     'menu' => [
+        'MAIN NAVIGATION',
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
+            'text' => 'Pages',
+            'url' => 'admin/pages',
+            'icon' => 'fas fa-fw fa-file'
         ],
+        'EMPLOYEE MANAGEMENT',
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text'    => 'Employees',
+            'icon'    => 'fas fa-fw fa-users',
+            'submenu' => [
+                [
+                    'text' => 'Employees',
+                    'url'  => '/pages/employees/employee',
+                    'icon'    => 'fas fa-fw fa-users',
+                ],
+                [
+                    'text' => 'Employee History',
+                    'url'  => '/pages/employee/employee_history/',
+                    'icon'    => 'fas fa-fw fa-history',
+                ],
+                [
+                    'text' => 'HR Form',
+                    'url'  => '/pages/employee/hr_form/',
+                    'icon'    => 'fas fa-fw fa-folder',
+                ],
+                [
+                    'text' => 'Itenerary Request',
+                    'url'  => '/pages/employee/itenerary_request/',
+                    'icon'    => 'fas fa-fw fa-plane-departure',
+                ],
+                [
+                    'text' => 'Monitor Attendance',
+                    'url'  => '/pages/employee/monitor_attendance/',
+                    'icon'    => 'fas fa-fw fa-clock',
+                ],
+                [
+                    'text' => 'Performance Review',
+                    'url'  => '/pages/employee/performance_review/',
+                    'icon'    => 'fas fa-fw fa-chart-bar',
+                ],
+                [
+                    'text' => 'Document Management',
+                    'url'  => '/pages/employee/document_management/',
+                    'icon'    => 'fas fa-fw fa-file',
+                ],
+            ],
         ],
+        'RECRUITMENT MANAGEMENT',
         [
-            'text'        => 'Dashboard',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-tachometer-alt',
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text'    => 'Recruitment',
+            'icon' => 'fas fa-fw fa-random',
+            'submenu' => [
+                [
+                    'text'    => 'Recruitment Setup',
+                    'url'     => '#',
+                    'icon'    => 'fas fa-fw fa-cogs',
+                    'submenu' => [
+                        [
+                            'text'    => 'Benefits',
+                            'url'     => '/pages/recruitment/recruitmentSetup/benefits/index',
+                            'icon' => 'fas fa-fw fa-gifts',
+                        ],
+                        [
+                            'text' => 'Education Levels',
+                            'url'  => '/pages/recruitment/recruitmentSetup/educationLevels/index',
+                            'icon' => 'fas fa-fw fa-university',
+                        ],
+                        [
+                            'text' => 'Employment Types',
+                            'url'  => '/pages/recruitment/recruitmentSetup/employmentTypes/index',
+                            'icon' => 'fas fa-fw fa-users',
+                        ],
+                        [
+                            'text' => 'Experience Levels',
+                            'url'  => '/pages/recruitment/recruitmentSetup/experienceLevels/index',
+                            'icon' => 'fas fa-fw fa-arrow-alt-circle-up',
+                        ],
+                        [
+                            'text' => 'Job Functions',
+                            'url'  => '/pages/recruitment/recruitmentSetup/jobFunctions/index',
+                            'icon' => 'fas fa-fw fa-users-cog',
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'Job Positions',
+                    'url'  => '/pages/recruitment/jobPositions/index',
+                    'icon' => 'fas fa-fw fa-user-tie',
+                ],
+                [
+                    'text' => 'Candidates',
+                    'url'  => '/pages/recruitment/candidates/index',
+                    'icon' => 'fas fa-fw fa-user-friends',
+                ],
+            ],
         ],
     ],
 
@@ -296,7 +366,7 @@ return [
         ],
         [
             'name' => 'Select2',
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

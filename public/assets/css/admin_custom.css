@@ -1,0 +1,197 @@
+@font-face {
+	src: url('../fonts/montserrat-reg.otf');
+	font-family: montserrat-reg;
+}
+@font-face {
+	src: url('../fonts/montserrat-thin.otf');
+	font-family: montserrat-thin;
+}
+
+/* CONTENT */
+
+.row > h1 {
+	font-family: montserrat-reg;
+	font-size: 30px;
+	color: #7a7a7a;
+	margin-bottom: 20px;
+}
+.content-wrapper {
+	background: #F4F6F9 !important; 
+}
+.content-header h1 {
+	padding: 20px;
+}
+.box {
+	background: #fff;
+	padding: 40px !important;
+	margin-bottom: 15.5px;
+}
+.box-container {
+	padding: 20px !important;
+}
+.box-title {
+	margin-bottom: 15px;
+}
+.box-title > h3 {
+	color: #000;
+	font-size: 23px;
+	text-transform: capitalize;
+	font-family: montserrat-reg;
+}
+
+/* ADD BUTTON */
+
+.box-add {
+	margin-bottom: 20px;
+	text-align: right;
+}
+.box-add > a {
+	text-transform: capitalize;
+	background: #007bff;
+	padding: 10px 15px;
+	color: #fff;
+	border-radius: 3px;
+}
+.box-add > a > i {
+	margin-left: 10px;
+}
+
+/* TABLE */
+.box-table > h5 {
+	text-align: center;
+	font-family: montserrat-reg;
+}
+.box-table table {
+	border: 1px solid #efefef;
+}
+.box-table table > thead > tr > td {
+	text-transform: capitalize;
+	font-family: montserrat-reg;
+	border: 0;
+	font-size: 17px;
+	color: #fff;
+	background: #007BFF;
+	border: 1px solid #007BFF;
+}
+.table td {
+	text-align: center;
+	vertical-align: middle;
+	font-family: montserrat-reg;
+	font-size: 15px;
+	color: #7a7a7a;
+}
+.table tbody td {
+	border-color: #efefef;
+}
+.table tbody td form {
+	display: inline-block;
+}
+.table td a {
+	background: #007BFF;
+	color: #fff;
+	padding: 5px 7px;
+	border-radius: 3px;
+}
+.table td button {
+	background: #EF5350;
+	color: #fff;
+	padding: 5px 7px;
+	border: 0;
+	border-radius: 3px;
+}
+.table td a, .table td button{
+	display: inline-block;
+}
+
+/* FORMS */
+.box > h3 {
+	color: #000;
+	font-size: 23px;
+	margin-bottom: 20px;
+	text-transform: capitalize;
+	font-family: montserrat-reg;
+}
+.form-box .form-group > label {
+	font-family: montserrat-reg;
+}
+.form-box .form-group > input {
+	font-family: montserrat-reg;
+}
+.form-box > form button {
+	border: 0;
+	border-radius: 3px;
+	font-family: montserrat-reg;
+	padding: 10px 25px;
+	text-transform: capitalize;
+	margin-right: 10px;
+	background: #007BFF;
+	color: #fff;
+	display: inline-block;
+	width: 100%;
+}
+.form-box > form a {
+	display: inline-block;
+	background: #2f3d4a;
+	padding: 10px 25px;
+	border-radius: 3px;
+	text-align: center;
+	margin-left: 10px;
+	color: #fff;
+}
+.form-box form .row .col-6:first-child {
+	padding-right: 10px;
+}
+
+
+/* PAGINATION */
+.links {
+	text-align: right;
+}
+.links > nav {
+	display: inline-flex;
+}
+.links > nav > ul {
+	display: inherit;
+}
+
+
+/* SIDEBAR */
+
+.nav-link > p {
+	font-family: montserrat-reg;
+	font-size: 14px;
+	margin-left: 10px !important;
+}
+.brand-link {
+	border: 0 !important;
+}
+.navbar {
+	background: #F4F6F9;
+	border: 0;
+}
+
+
+/* ALERT */
+.alert {
+	border: 0;
+	border-radius: 0;
+	padding: 35px;
+	background: #D4EDDA;
+	position: fixed;
+	top: 20px;
+	right: 25px;
+	z-index: 9999;
+}
+.alert > button {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+.alert > p {
+	margin-bottom: 0;
+	color: #2ED79E;
+}
+.alert > p > i {
+	color: #2ED79E;
+	margin-right: 5px;
+}
