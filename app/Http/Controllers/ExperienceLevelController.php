@@ -7,92 +7,63 @@ use App\hris_experience_levels;
 
 class ExperienceLevelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {   
-        $experienceLevels = hris_experience_levels::all();
+        $experienceLevels = hris_experience_levels::paginate(10);
         return view('pages.recruitment.recruitmentSetup.experienceLevels.index', compact('experienceLevels'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(hris_experience_levels $experienceLevel)
     {
         return view('pages.recruitment.recruitmentSetup.experienceLevels.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $request->validate(['name'=>'required']);
+        $experienceLevel = new hris_experience_levels();
 
-        $experienceLevel = new hris_experience_levels(['name'=>$request->get('name')]);
-        $experienceLevel->save();
-        return redirect('/experienceLevels')->with('success', 'Experience level added!');
+        if ($this->validatedData()) {
+            $experienceLevel->name = request('name');
+            $experienceLevel->save();
+            return redirect('/pages/recruitment/recruitmentSetup/experienceLevels/index')->with('success', 'Experience level added!');
+        } else {
+            return back()->withErrors($this->validatedData);
+        }
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(hris_experience_levels $experienceLevel)
     {
-        $experienceLevel = hris_experience_levels::find($id);
         return view('pages.recruitment.recruitmentSetup.experienceLevels.edit', compact('experienceLevel'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(hris_experience_levels $experienceLevel, Request $request)
     {
-        $request->validate(['name'=>'required']);
+        if ($this->validatedData()) {
+            $experienceLevel->name = request('name');
+            $experienceLevel->update();
+            return redirect('/pages/recruitment/recruitmentSetup/experienceLevels/index')->with('success', 'Experience level updated!');
+        } else {
+            return back()->withErrors($this->validatedData);
+        }
+    }
 
-        $experienceLevel = hris_experience_levels::find($id);
-        $experienceLevel->name = $request->get('name');
-        $experienceLevel->save();
-        return redirect('/experienceLevels')->with('success', 'Experience level updated!');    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(hris_experience_levels $experienceLevel)
     {
-        $experienceLevel = hris_experience_levels::find($id);
         $experienceLevel->delete();
+        return redirect('/pages/recruitment/recruitmentSetup/experienceLevels/index')->with('success','Experience level deleted!');
+    }
 
-        return redirect('/experienceLevels')->with('success','Experience level deleted!');
+    protected function validatedData()
+    {
+        return request()->validate([
+            'name' => 'required|max:100'
+        ]);
     }
 }

@@ -7,94 +7,65 @@ use App\hris_employment_types;
 
 class EmploymentTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $employmentTypes = hris_employment_types::all();
+        $employmentTypes = hris_employment_types::paginate(10);
         return view('pages.recruitment.recruitmentSetup.employmentTypes.index', compact('employmentTypes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(hris_employment_types $employmentType)
     {
         return view('pages.recruitment.recruitmentSetup.employmentTypes.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $request->validate(['name'=>'required']);
+        $employmentType = new hris_employment_types();
 
-        $employmentType = new hris_employment_types(['name'=>$request->get('name')]);
-        $employmentType->save();
-        return redirect('/employmentTypes')->with('success', 'Employment type added!');
+        if ($this->validatedData()) {
+            $employmentType->name = request('name');
+            $employmentType->save();
+            return redirect('/pages/recruitment/recruitmentSetup/employmentTypes/index')->with('success', 'Employment type successfully added!');
+        } else {
+            return back()->withErrors($this->validatedData);
+        }
+
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $employmentType = hris_employment_types::find($id);
         return view('pages.recruitment.recruitmentSetup.employmentTypes.edit', compact('employmentType'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(hris_employment_types $employmentType, Request $request)
     {
-        $request->validate(['name'=>'required']);
-
-        $employmentType = hris_employment_types::find($id);
-        $employmentType->name = $request->get('name');
-        $employmentType->save();
-        return redirect('/employmentTypes')->with('success', 'Employment type updated!');
+        if ($this->validatedData()) {
+            $employmentType->name = request('name');
+            $employmentType->update();
+            return redirect('/pages/recruitment/recruitmentSetup/employmentTypes/index')->with('success', 'Employment type successfully updated!');
+        } else {
+            return back()->withErrors($this->validatedData);
+        } 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(hris_employment_types $employmentType)
     {
-        $employmentType = hris_employment_types::find($id);
         $employmentType->delete();
+        return redirect('/pages/recruitment/recruitmentSetup/employmentTypes/index')->with('success','Employment type deleted!');
+    }
 
-        return redirect('/employmentTypes')->with('success','Employment type deleted!');
+
+    protected function validatedData()
+    {
+        return request()->validate([
+            'name' => 'required|max:100'
+        ]);
     }
 }

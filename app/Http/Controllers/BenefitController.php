@@ -2,97 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\hris_benefits;
+use Illuminate\Http\Request;
 
 class BenefitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {   
-        $benefits = hris_benefits::all();
+        $benefits = hris_benefits::paginate(10);
         return view('pages.recruitment.recruitmentSetup.benefits.index', compact('benefits'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(hris_benefits $benefit)
     {
         return view('pages.recruitment.recruitmentSetup.benefits.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $request->validate(['name'=>'required']);
 
-        $benefit = new hris_benefits(['name'=>$request->get('name')]);
-        $benefit->save();
-        return redirect('/benefits')->with('success', 'Benefit added!');
+        $benefit = new hris_benefits();
+
+        if ($this->validatedData()) {
+            $benefit->name = request('name');
+            $benefit->save();
+            return redirect('/pages/recruitment/recruitmentSetup/benefits/index')->with('success', 'Benefit successfully added!');
+        } else {
+            return back()->withErrors($this->validatedData);
+        }
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(hris_benefits $benefit)
     {
-        $benefit = hris_benefits::find($id);
         return view('pages.recruitment.recruitmentSetup.benefits.edit', compact('benefit'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $request->validate(['name'=>'required']);
 
-        $benefit = hris_benefits::find($id);
-        $benefit->name = $request->get('name');
-        $benefit->save();
-        return redirect('/benefits')->with('success', 'Benefit updated!');    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function update(hris_benefits $benefit, Request $request)
     {
-        $benefit = hris_benefits::find($id);
+        if ($this->validatedData()) {
+            $benefit->name = request('name');
+            $benefit->update();
+            return redirect('/pages/recruitment/recruitmentSetup/benefits/index')->with('success', 'Benefit successfully updated!');
+        } else {
+            return back()->withErrors($this->validatedData);
+        } 
+    }
+
+
+    public function destroy(hris_benefits $benefit)
+    {
         $benefit->delete();
 
-        return redirect('/benefits')->with('success','Benefit deleted!');
+        return redirect('/pages/recruitment/recruitmentSetup/benefits/index')->with('success','Benefit successfully deleted!');
+    }
+
+    protected function validatedData()
+    {
+        return request()->validate([
+            'name' => 'required|max:100'
+        ]);
     }
 }

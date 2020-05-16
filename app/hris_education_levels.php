@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class hris_education_levels extends Model
 {
-    protected $fillable = ['name'];
+    protected $guarded = [];
 }

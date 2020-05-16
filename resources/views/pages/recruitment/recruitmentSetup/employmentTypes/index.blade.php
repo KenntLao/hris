@@ -1,22 +1,23 @@
 {{-- resources/views/admin/dashboard.blade.php --}}
 @extends('adminlte::page')
-@section('title', 'Dashboard')
+@section('title', 'HRIS | Recruitment Setup - Employment Types')
 @section('content_header')
-<h1><a href="{{ route('recruitmentSetup.index') }}">Recruitment Setup</a></h1>
 @stop
 @section('content')
 <div class="row no-gutters">
-	@if (session()->get('success'))
-	<div class="alert alert-success">
-		{{ session()->get('success') }}
+	@if ($message = Session::get('success'))
+	<div class="alert alert-success alert-block">
+	    <button type="button" class="close" data-dismiss="alert">×</button>
+	    <p><i class="fas fa-fw fa-check-circle"></i>{{ $message }}</p>
 	</div>
 	@endif
+	<h1>Recruitment Setup</h1>
 	<div class="col-12 box">
 		<div class="box-title">
 			<h3>Employment Types</h3>
 		</div>
 		<div class="box-add">
-			<a href="{{ route('employmentTypes.create') }}">add <i class="fa fa-plus"></i></a>
+			<a href="/pages/recruitment/recruitmentSetup/employmentTypes/create">add <i class="fa fa-plus"></i></a>
 		</div>
 		<div class="box-table">
 			@if ( count($employmentTypes) > 0)
@@ -36,8 +37,8 @@
 								<td>{{$employmentType->id}}</td>
 								<td>{{$employmentType->name}}</td>
 								<td>
-									<a href="{{ route('employmentTypes.edit', $employmentType->id) }}"><i class="fa fa-edit"></i></a>
-									<form action="{{ route('employmentTypes.destroy', $employmentType->id )}}" method="post">
+									<a href="/pages/recruitment/recruitmentSetup/employmentTypes/{{$employmentType->id}}/edit"><i class="fa fa-edit"></i></a>
+									<form action="/pages/recruitment/recruitmentSetup/employmentTypes/delete/{{$employmentType->id}}" method="post">
 										@csrf
 										@method('DELETE')
 										<button type="submit"><i class="fa fa-trash"></i></button>

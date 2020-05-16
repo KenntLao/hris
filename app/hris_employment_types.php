@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class hris_employment_types extends Model
 {
-    protected $fillable = ['name'];
+    protected $guarded = [];
 }

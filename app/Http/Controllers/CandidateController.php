@@ -5,113 +5,169 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\hris_candidates;
 use App\hris_job_positions;
+use App\hris_countries;
 
 class CandidateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $candidates = hris_candidates::all();
+        $candidates = hris_candidates::paginate(10);
         return view('pages.recruitment.candidates.index', compact('candidates'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(hris_candidates $candidate)
     {   
         $jobPositions = hris_job_positions::all();
-        return view('pages.recruitment.candidates.create', compact('jobPositions'));
+        $countries = hris_countries::all()->sortBy('name');
+        $candidate = hris_candidates::all();
+        return view('pages.recruitment.candidates.create', compact('candidate', 'jobPositions', 'countries'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $request->validate([
 
-            'position_applied'=>'required',
-            'hiring_stage'=>'required',
-            'first_name'=>'required',
-            'last_name'=>'required',
-            'gender'=>'required',
-            'country'=>'required',
-            'telephone'=>'required',
-            'email'=>'required',
-            'resume'=>'required',   
-            'prefered_industry'=>'required'
-        ]);
+        $candidate = new hris_candidates();
 
-        $candidate = new hris_candidates([
-            'position_applied'=>$request->get('position_applied'),
-            'hiring_stage'=>$request->get('hiring_stage'),
-            'first_name'=>$request->get('first_name'),
-            'last_name'=>$request->get('last_name'),
-            'profile_image'=>$request->get('profile_image'),
-            'gender'=>$request->get('gender'),
-            'city'=>$request->get('city'),
-            'country'=>$request->get('country'),
-            'telephone'=>$request->get('telephone'),
-            'email'=>$request->get('email'),
-            'resume'=>$request->get('resume'),
-            'resume_headline'=>$request->get('resume_headline'),
-            'profile_summary'=>$request->get('profile_summary'),
-            'total_years_exp'=>$request->get('total_years_exp'),
-            'work_history'=>$request->get('work_history'),
-            'education'=>$request->get('education'),
-            'skills'=>$request->get('skills'),
-            'referees'=>$request->get('referees'),
-            'prefered_industry'=>$request->get('prefered_industry'),
-            'expected_salary'=>$request->get('expected_salary')
-        ]);
-        $candidate->save();
-        return redirect('/candidates')->with('success', 'Candidate added!');
+        if ( $request->hasFile('profile_image') && $request->hasFile('resume') ) {
+            if($this->validatedData()) {
+                $imageName = time() . '.' . $request->profile_image->extension();
+                $resume = time() . '.' . $request->resume->extension();
+                $candidate->position_applied = request('position_applied');
+                $candidate->hiring_stage = request('hiring_stage');
+                $candidate->first_name = request('first_name');
+                $candidate->last_name = request('last_name');
+                $candidate->profile_image = $imageName;
+                $candidate->gender = request('gender');
+                $candidate->city = request('city');
+                $candidate->country = request('country');
+                $candidate->telephone = request('telephone');
+                $candidate->email = request('email');
+                $candidate->resume = $resume;
+                $candidate->resume_headline = request('resume_headline');
+                $candidate->profile_summary = request('profile_summary');
+                $candidate->total_years_exp = request('total_years_exp');
+                $candidate->work_history = request('work_history');
+                $candidate->education = request('education');
+                $candidate->skills = request('skills');
+                $candidate->referees = request('referees');
+                $candidate->prefered_industry = request('prefered_industry');
+                $candidate->expected_salary = request('expected_salary');
+                $request->profile_image->move(public_path('assets/images/candidates/profile_image'), $imageName);
+                $request->resume->move(public_path('assets/images/candidates/resume'), $resume);
+                $candidate->save();
+                return redirect('/pages/recruitment/candidates/index')->with('success','Candidate successfully added!');
+            } else {
+                return back()->withErrors($this->validatedData());
+            }
+        } else {
+            return back()->withErrors($this->validatedData());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(hris_candidates $candidate)
     {
-        $candidate = hris_candidates::find($id);
-        $jobPositions = hris_job_positions::all();
-        return view('pages.recruitment.candidates.edit', compact('candidate', 'jobPositions'));
+        $jobPositions = hris_job_positions::all()->sortBy('job_title');
+        $countries = hris_countries::all()->sortBy('name');
+        return view('pages.recruitment.candidates.edit', compact('candidate', 'countries', 'jobPositions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(hris_candidates $candidate, Request $request)
     {
-        $request->validate([
+        if ( $request->hasFile('profile_image') && $request->hasFile('resume') ) {
+            if($this->validatedData()) {
+                $pathCandidate = public_path('assets/images/candidates/profile_image/');
+                $pathResume = public_path('assets/images/candidates/resume/');
+                $imageName = time() . '.' . $request->profile_image->extension();
+                $resume = time() . '.' . $request->resume->extension();
+                if ($candidate->profile_image != '' && $candidate->profile_image != NULL) {
+                    $old_file_1 = $pathCandidate . $candidate->profile_image;
+                    unlink($old_file_1);
+                }
+                if ($candidate->resume != '' && $candidate->resume != NULL) {
+                    $old_file_2 = $pathResume . $candidate->resume;
+                    unlink($old_file_2);
+                }
+                $candidate->position_applied = request('position_applied');
+                $candidate->hiring_stage = request('hiring_stage');
+                $candidate->first_name = request('first_name');
+                $candidate->last_name = request('last_name');
+                $candidate->profile_image = $imageName;
+                $candidate->gender = request('gender');
+                $candidate->city = request('city');
+                $candidate->country = request('country');
+                $candidate->telephone = request('telephone');
+                $candidate->email = request('email');
+                $candidate->resume = $resume;
+                $candidate->resume_headline = request('resume_headline');
+                $candidate->profile_summary = request('profile_summary');
+                $candidate->total_years_exp = request('total_years_exp');
+                $candidate->work_history = request('work_history');
+                $candidate->education = request('education');
+                $candidate->skills = request('skills');
+                $candidate->referees = request('referees');
+                $candidate->prefered_industry = request('prefered_industry');
+                $candidate->expected_salary = request('expected_salary');
+                $request->profile_image->move(public_path('assets/images/candidates/profile_image'), $imageName);
+                $request->resume->move(public_path('assets/images/candidates/resume'), $resume);
+                $candidate->update();
+                return redirect('/pages/recruitment/candidates/index')->with('success','Candidate successfully updated!');
+            } else {
+                return back()->withErrors($this->validatedData());
+            }
+        } else {
+            if($this->validatedData()) {
+                $candidate->position_applied = request('position_applied');
+                $candidate->hiring_stage = request('hiring_stage');
+                $candidate->first_name = request('first_name');
+                $candidate->last_name = request('last_name');
+                $candidate->gender = request('gender');
+                $candidate->city = request('city');
+                $candidate->country = request('country');
+                $candidate->telephone = request('telephone');
+                $candidate->email = request('email');
+                $candidate->resume_headline = request('resume_headline');
+                $candidate->profile_summary = request('profile_summary');
+                $candidate->total_years_exp = request('total_years_exp');
+                $candidate->work_history = request('work_history');
+                $candidate->education = request('education');
+                $candidate->skills = request('skills');
+                $candidate->referees = request('referees');
+                $candidate->prefered_industry = request('prefered_industry');
+                $candidate->expected_salary = request('expected_salary');
+                $candidate->update();
+                return redirect('/pages/recruitment/candidates/index')->with('success','Candidate successfully updated!');
+            } else {
+                return back()->withErrors($this->validatedData());
+            }
+        }
+
+    }
+
+    public function destroy(hris_candidates $candidate)
+    {
+        $candidate->delete();
+        $pathCandidate = public_path('assets/images/candidates/profile_image/');
+        $pathResume = public_path('assets/images/candidates/resume/');
+        if ($candidate->profile_image != '' && $candidate->profile_image != NULL) {
+            $old_file_1 = $pathCandidate . $candidate->profile_image;
+            unlink($old_file_1);
+        }
+        if ($candidate->resume != '' && $candidate->resume != NULL) {
+            $old_file_2 = $pathResume . $candidate->resume;
+            unlink($old_file_2);
+        }
+        return redirect('/pages/recruitment/candidates/index')->with('success','Candidate successfully deleted!');
+    }
+
+    protected function validatedData() {
+
+        return request()->validate([
 
             'position_applied'=>'required',
             'hiring_stage'=>'required',
@@ -120,46 +176,10 @@ class CandidateController extends Controller
             'gender'=>'required',
             'country'=>'required',
             'telephone'=>'required',
-            'email'=>'required',
-            'resume'=>'required',   
+            'email'=>'required',  
             'prefered_industry'=>'required'
         ]);
-        $candidate = hris_candidates::find($id);
-        $candidate->position_applied = $request->get('position_applied');
-        $candidate->hiring_stage = $request->get('hiring_stage');
-        $candidate->first_name = $request->get('first_name');
-        $candidate->last_name = $request->get('last_name');
-        $candidate->profile_image = $request->get('profile_image');
-        $candidate->gender = $request->get('gender');
-        $candidate->city = $request->get('city');
-        $candidate->country = $request->get('country');
-        $candidate->telephone = $request->get('telephone');
-        $candidate->email = $request->get('email');
-        $candidate->resume = $request->get('resume');
-        $candidate->resume_headline = $request->get('resume_headline');
-        $candidate->profile_summary = $request->get('profile_summary');
-        $candidate->total_years_exp = $request->get('total_years_exp');
-        $candidate->work_history = $request->get('work_history');
-        $candidate->education = $request->get('education');
-        $candidate->skills = $request->get('skills');
-        $candidate->referees = $request->get('referees');
-        $candidate->prefered_industry = $request->get('prefered_industry');
-        $candidate->expected_salary = $request->get('expected_salary');
-        $candidate->save();
-        return redirect('/candidates')->with('success','Candidate updated!');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $candidate = hris_candidates::find($id);
-        $candidate->delete();
-        return redirect('/candidates')->with('success','Candidate deleted!');
-    }
 }

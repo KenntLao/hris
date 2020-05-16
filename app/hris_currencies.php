@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class hris_benefits extends Model
+class hris_currencies extends Model
 {
-    protected $guarded = [];
+    //
 }

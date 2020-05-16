@@ -1,22 +1,23 @@
 {{-- resources/views/admin/dashboard.blade.php --}}
 @extends('adminlte::page')
-@section('title', 'Dashboard')
+@section('title', 'HRIS | Recruitment Setup - Experience Levels')
 @section('content_header')
-<h1><a href="{{ route('recruitmentSetup.index') }}">Recruitment Setup</a></h1>
 @stop
 @section('content')
 <div class="row no-gutters">
-	@if (session()->get('success'))
-	<div class="alert alert-success">
-		{{ session()->get('success') }}
+	@if ($message = Session::get('success'))
+	<div class="alert alert-success alert-block">
+	    <button type="button" class="close" data-dismiss="alert">×</button>
+	    <p><i class="fas fa-fw fa-check-circle"></i>{{ $message }}</p>
 	</div>
 	@endif
+	<h1>Recruitment Setup</h1>
 	<div class="col-12 box">
 		<div class="box-title">
 			<h3>Experience Levels</h3>
 		</div>
 		<div class="box-add">
-			<a href="{{ route('experienceLevels.create') }}">add <i class="fa fa-plus"></i></a>
+			<a href="/pages/recruitment/recruitmentSetup/experienceLevels/create">add <i class="fa fa-plus"></i></a>
 		</div>
 		<div class="box-table">
 			@if ( count($experienceLevels) > 0)
@@ -36,8 +37,8 @@
 								<td>{{$experienceLevel->id}}</td>
 								<td>{{$experienceLevel->name}}</td>
 								<td>
-									<a href="{{ route('experienceLevels.edit', $experienceLevel->id) }}"><i class="fa fa-edit"></i></a>
-									<form action="{{ route('experienceLevels.destroy', $experienceLevel->id )}}" method="post">
+									<a href="/pages/recruitment/recruitmentSetup/experienceLevels/{{$experienceLevel->id}}/edit"><i class="fa fa-edit"></i></a>
+									<form action="/pages/recruitment/recruitmentSetup/experienceLevels/delete/{{$experienceLevel->id}}" method="post">
 										@csrf
 										@method('DELETE')
 										<button type="submit"><i class="fa fa-trash"></i></button>

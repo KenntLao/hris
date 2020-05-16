@@ -23,7 +23,7 @@ class JobFunctionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(hris_job_functions $jobFunction)
     {
         return view('pages.recruitment.recruitmentSetup.jobFunctions.create');
     }
@@ -36,11 +36,16 @@ class JobFunctionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name'=>'required']);
+        $jobFunction = new hris_job_functions();
 
-        $jobFunction = new hris_job_functions(['name'=>$request->get('name')]);
-        $jobFunction->save();
-        return redirect('/jobFunctions')->with('success', 'Job function added!');
+        if ($this->validatedData()) {
+            $jobFunction->name = request('name');
+            $jobFunction->save();
+            return redirect('/pages/recruitment/recruitmentSetup/jobFunctions/index')->with('success', 'Job function successfully added!');
+        } else {
+            return back()->withErrors($this->validatedData);
+        }
+
     }
 
     /**
@@ -60,9 +65,8 @@ class JobFunctionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(hris_job_functions $jobFunction)
     {
-        $jobFunction = hris_job_functions::find($id);
         return view('pages.recruitment.recruitmentSetup.jobFunctions.edit', compact('jobFunction'));
     }
 
@@ -73,26 +77,27 @@ class JobFunctionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(hris_job_functions $jobFunction, Request $request)
     {
-        $request->validate(['name'=>'required']);
+        if ($this->validatedData()) {
+            $jobFunction->name = request('name');
+            $jobFunction->update();
+            return redirect('/pages/recruitment/recruitmentSetup/jobFunctions/index')->with('success', 'Job function successfully added!');
+        } else {
+            return back()->withErrors($this->validatedData);
+        }  
+    }
 
-        $jobFunction = hris_job_functions::find($id);
-        $jobFunction->name = $request->get('name');
-        $jobFunction->save();
-        return redirect('/jobFunctions')->with('success', 'Job function updated!');    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(hris_job_functions $jobFunction)
     {
-        $jobFunction = hris_job_functions::find($id);
         $jobFunction->delete();
+        return redirect('/pages/recruitment/recruitmentSetup/jobFunctions/index')->with('success','Job function deleted!');
+    }
 
-        return redirect('/jobFunctions')->with('success','Job function deleted!');
+    protected function validatedData() 
+    {
+        return request()->validate([
+            'name' => 'required|max:100'
+        ]);
     }
 }

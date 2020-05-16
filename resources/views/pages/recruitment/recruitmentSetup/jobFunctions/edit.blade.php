@@ -1,22 +1,29 @@
 {{-- resources/views/admin/dashboard.blade.php --}}
 @extends('adminlte::page')
-@section('title', 'Dashboard')
+@section('title', 'HRIS | Recruitment Setup - Job Functions')
 @section('content_header')
-<h1><a href="{{ route('recruitmentSetup.index') }}">Recruitment Setup</a></h1>
 @stop
 @section('content')
 <div class="row no-gutters">
-	<div class="col-12 box">
-		<a href="{{ route('jobFunctions.index') }}">Back</a>
+	<div class="col-12 offset-md-4 col-md-4 box">
+		<h3>edit job function</h3>
+		<a href="/pages/recruitment/recruitmentSetup/jobFunctions/index">Back</a>
 		<div class="form-box">
-			<form class="form-horizontal" method="post" action="{{ route('jobFunctions.update', $jobFunction->id) }}">
+			<form class="form-horizontal" method="post" action="/pages/recruitment/recruitmentSetup/jobFunctions/update/{{$jobFunction->id}}">
 				@csrf
 				@method('PATCH')
 				<div class="form-group">
 					<label for="name">Name:</label>
 					<input class="form-control" type="text" name="name" value="{{ $jobFunction->name }}" required>
 				</div>
-				<button type="submit">submit</button>
+				<div class="row no-gutters">
+					<div class="col-6">
+						<button type="submit">submit</button>
+					</div>
+					<div class="col-6">
+						<a href="/pages/recruitment/recruitmentSetup/jobFunctions/index">Back</a>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
