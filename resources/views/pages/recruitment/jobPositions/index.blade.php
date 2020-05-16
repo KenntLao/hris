@@ -2,7 +2,11 @@
 @extends('adminlte::page')
 @section('title', 'HRIS | Recruitment - Job Positions')
 @section('content_header')
-<h1>Recruitment</h1>
+<div class="row no-gutters">
+	<div class="col-12 offset-md-2 col-md-8 page-title">
+		<h1>recruitment</h1>
+	</div>
+</div>
 @stop
 @section('content')
 <div class="row no-gutters">
@@ -12,27 +16,29 @@
 	    <p><i class="fas fa-fw fa-check-circle"></i>{{ $message }}</p>
 	</div>
 	@endif
-	<div class="col-12 box">
-		<div class="box-title">
-			<h3>Job Positions</h3>
-		</div>
-		<div class="box-add">
-			<a href="/pages/recruitment/jobPositions/create">add <i class="fa fa-plus"></i></a>
+	<div class="col-12 offset-md-2 col-md-8 box">
+		<div class="row no-gutters">
+			<div class="box-title">
+				<h3>Job Positions</h3>
+			</div>
+			<div class="box-add">
+				<a href="/pages/recruitment/jobPositions/create">add <i class="fa fa-plus"></i></a>
+			</div>
 		</div>
 		<div class="box-table">
 			@if(count($jobPositions) > 0)
 			<div class="row no-gutters">
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table table-hover table-bordered table-striped table-condensed">
 						<thead>
 							<tr>
-								<td>id</td>
-								<td>job code</td>
-								<td>job title</td>
-								<td>details</td>
-								<td>country</td>
-								<td>department</td>
-								<td>actions</td>
+								<th>id</th>
+								<th>job code</th>
+								<th>job title</th>
+								<th style="width: 40%">details</th>
+								<th>country</th>
+								<th>department</th>
+								<th>actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -41,7 +47,7 @@
 								<td>{{$jobPosition->id}}</td>
 								<td>{{$jobPosition->job_code}}</td>
 								<td>{{$jobPosition->job_title}}</td>
-								<td>{{$jobPosition->job_description}}</td>
+								<td style="text-align: justify;">{{$jobPosition->job_description}}</td>
 								<td>{{$jobPosition->country}}</td>
 								<td>{{$jobPosition->department}}</td>
 								<td>
