@@ -222,9 +222,9 @@ return [
             'submenu' => [
                 [
                     'text' => 'Employees',
-                    'url'  => '/pages/employees/employee',
+                    'url'  => '/employees/employee',
                     'icon'    => 'fas fa-fw fa-users',
-                    'icon_color' => 'yellow'
+                    'icon_color' => 'yellow',
                 ],
                 [
                     'text' => 'Employee History',

@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/* EMPLOYEES PAGE */
+Route::resource('employees/employee/', 'EmployeeController');
+
+
 /* JOB POSITIONS PAGE */
 Route::resource('recruitment/jobPositions', 'JobPositionController');
 Route::post('recruitment/jobPositions/create', 'JobPositionController@store');
