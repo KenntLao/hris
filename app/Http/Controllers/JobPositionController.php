@@ -175,7 +175,12 @@ class JobPositionController extends Controller
 
     public function destroy(hris_job_positions $jobPosition)
     {
+        $imagePath = public_path('assets/images/job_positions/');
         $jobPosition->delete();
+        if ($jobPosition->image != '' && $jobPosition->image != NULL) {
+            $old_file = $imagePath . $jobPosition->image;
+            unlink($old_file);
+        }
         return redirect('/pages/recruitment/jobPositions/index')->with('success','Education level deleted!');
     }
 

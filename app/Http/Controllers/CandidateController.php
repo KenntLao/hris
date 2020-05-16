@@ -61,7 +61,7 @@ class CandidateController extends Controller
                 return back()->withErrors($this->validatedData());
             }
         } else {
-            return back()->withErrors($this->validatedData);
+            return back()->withErrors($this->validatedData());
         }
     }
 
@@ -152,7 +152,17 @@ class CandidateController extends Controller
     public function destroy(hris_candidates $candidate)
     {
         $candidate->delete();
-        return redirect('/candidates')->with('success','Candidate successfully deleted!');
+        $pathCandidate = public_path('assets/images/candidates/profile_image/');
+        $pathResume = public_path('assets/images/candidates/resume/');
+        if ($candidate->profile_image != '' && $candidate->profile_image != NULL) {
+            $old_file_1 = $pathCandidate . $candidate->profile_image;
+            unlink($old_file_1);
+        }
+        if ($candidate->resume != '' && $candidate->resume != NULL) {
+            $old_file_2 = $pathResume . $candidate->resume;
+            unlink($old_file_2);
+        }
+        return redirect('/pages/recruitment/candidates/index')->with('success','Candidate successfully deleted!');
     }
 
     protected function validatedData() {
