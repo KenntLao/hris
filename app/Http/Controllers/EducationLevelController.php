@@ -7,6 +7,7 @@ use App\hris_education_levels;
 
 class EducationLevelController extends Controller
 {
+
     public function index()
     {   
         $educationLevels = hris_education_levels::all();
@@ -46,7 +47,7 @@ class EducationLevelController extends Controller
         if ($this->validatedData()) {
             $educationLevel->name = request('name');
             $educationLevel->update();
-            return redirect('/pages/recruitment/recruitmentSetup/educationLevels/index')->with('success', 'Education level successfully added!');
+            return redirect('/pages/recruitment/recruitmentSetup/educationLevels/index')->with('success', 'Education level successfully updated!');
         } else {
             return back()->withErrors($this->validatedData);
         } 
@@ -56,7 +57,7 @@ class EducationLevelController extends Controller
     {
         $educationLevel->delete();
 
-        return redirect('/pages/recruitment/recruitmentSetup/educationLevels/index')->with('success','Education level deleted!');
+        return redirect('/pages/recruitment/recruitmentSetup/educationLevels/index')->with('success','Education level successfully deleted!');
     }
 
     protected function validatedData()

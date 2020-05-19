@@ -1,10 +1,10 @@
 {{-- resources/views/admin/dashboard.blade.php --}}
 @extends('adminlte::page')
-@section('title', 'HRIS | Recruitment Setup - Experience Levels')
+@section('title', 'HRIS | Administration - Company Structure')
 @section('content_header')
 <div class="row no-gutters">
-	<div class="col-12 offset-md-3 col-md-6 page-title">
-		<h1>recruitment setup</h1>
+	<div class="col-12 offset-md-2 col-md-8 page-title">
+		<h1>Company Structure</h1>
 	</div>
 </div>
 @stop
@@ -16,35 +16,43 @@
 	    <p><i class="fas fa-fw fa-check-circle"></i>{{ $message }}</p>
 	</div>
 	@endif
-	<div class="col-12 offset-md-2 col-md-8 offset-xl-3 col-xl-6 box">
+	<div class="col-12 offset-md-2 col-md-8 box">
 		<div class="row no-gutters">
 			<div class="box-title">
-				<h3>Experience Levels</h3>
+				<h3>Departments</h3>
 			</div>
 			<div class="box-add">
-				<a href="/pages/recruitment/recruitmentSetup/experienceLevels/create">add <i class="fa fa-plus"></i></a>
+				<a href="/pages/admin/company/create">add <i class="fa fa-plus"></i></a>
 			</div>
 		</div>
 		<div class="box-table">
-			@if ( count($experienceLevels) > 0)
+			@if(count($companies) > 0)
 			<div class="row no-gutters">
 				<div class="table-responsive">
 					<table class="table table-hover table-bordered table-striped table-condensed">
 						<thead>
 							<tr>
-								<th>id</th>
-								<th>name</th>
-								<th>action</th>
+								<th>name</td>
+								<th>address</th>
+								<th>type</th>
+								<th>country</th>
+								<th>time zone</td>
+								<th>parent structure</th>
+								<th>actions</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($experienceLevels as $experienceLevel)
+							@foreach($companies as $company)
 							<tr>
-								<td>{{$experienceLevel->id}}</td>
-								<td>{{$experienceLevel->name}}</td>
+								<td>{{$company->name}}</td>
+								<td>{{$company->address}}</td>
+								<td>{{$company->type}}</td>
+								<td>{{$company->country}}</td>
+								<td>{{$company->timezone}}</td>
+								<td>{{$company->parent_structure}}</td>
 								<td>
-									<a href="/pages/recruitment/recruitmentSetup/experienceLevels/{{$experienceLevel->id}}/edit"><i class="fa fa-edit"></i></a>
-									<form action="/pages/recruitment/recruitmentSetup/experienceLevels/delete/{{$experienceLevel->id}}" method="post">
+									<a href="/pages/admin/company/{{$company->id}}/edit"><i class="fa fa-edit"></i></a>
+									<form action="/pages/admin/company/delete/{{$company->id}}" method="post">
 										@csrf
 										@method('DELETE')
 										<button type="submit"><i class="fa fa-trash"></i></button>
@@ -57,7 +65,7 @@
 				</div>
 			</div>
 			@else
-			<h5>No data available.</h5>
+			<h5>No Data Available.</h5>
 			@endif
 		</div>
 	</div>
