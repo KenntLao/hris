@@ -58,7 +58,7 @@ class EmploymentTypeController extends Controller
     public function destroy(hris_employment_types $employmentType)
     {
         $employmentType->delete();
-        return redirect('/pages/recruitment/recruitmentSetup/employmentTypes/index')->with('success','Employment type deleted!');
+        return redirect('/pages/recruitment/recruitmentSetup/employmentTypes/index')->with('success','Employment type successfully deleted!');
     }
 
 

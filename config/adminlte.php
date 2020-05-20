@@ -214,94 +214,206 @@ return [
             'url' => 'admin/pages',
             'icon' => 'fas fa-fw fa-file'
         ],
+        'ADMINISTRATION',
+        [
+            'text' => 'Admin',
+            'icon' => 'fas fa-fw fa-cubes',
+            'icon_color' => 'cyan',
+            'submenu' => [
+                [   
+                    'text' => 'Company Structure',
+                    'icon' => 'fas fa-fw fa-building',
+                    'url' => '/pages/admin/company/index',
+                    'icon_color' => 'cyan',
+                ],
+                [
+                    'text' => 'Job Details Setup',
+                    'icon' => 'fas fa-fw fa-columns',
+                    'icon_color' => 'cyan',
+                    'submenu' => [
+                        [
+                            'text' => 'Job Titles',
+                            'icon' => 'fas fa-fw fa-columns',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/jobDetails/jobTitles/index'
+                        ],
+                        [
+                            'text' => 'Pay Grades',
+                            'icon' => 'fas fa-fw fa-columns',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/jobDetails/payGrades/index'
+                        ],
+                        [
+                            'text' => 'Employment Status',
+                            'icon' => 'fas fa-fw fa-columns',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/jobDetails/employmentStatuses/index'
+                        ],
+                    ]
+                ],
+                [
+                    'text' => 'Qualifications Setup',
+                    'icon' => 'fas fa-fw fa-check-square',
+                    'icon_color' => 'cyan',
+                    'submenu' => [
+                        [
+                            'text' => 'Skills',
+                            'icon' => 'fas fa-fw fa-check-square',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/qualifications/skills/index'
+                        ],
+                        [
+                            'text' => 'Education',
+                            'icon' => 'fas fa-fw fa-check-square',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/qualifications/educations/index'
+                        ],
+                        [
+                            'text' => 'Certifications',
+                            'icon' => 'fas fa-fw fa-check-square',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/qualifications/certifications/index'
+                        ],
+                        [
+                            'text' => 'Languages',
+                            'icon' => 'fas fa-fw fa-check-square',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/qualifications/languages/index'
+                        ]
+                    ]
+                ],
+                [
+                    'text' => 'Training Setup',
+                    'icon' => 'fas fa-fw fa-briefcase',
+                    'icon_color' => 'cyan',
+                    'submenu' => [
+                        [
+                            'text' => 'Courses',
+                            'icon' => 'fas fa-fw fa-briefcase',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/training/courses/index'
+                        ],
+                        [
+                            'text' => 'Training Sessions',
+                            'icon' => 'fas fa-fw fa-briefcase',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/training/trainingSessions/index'
+                        ],
+                        [
+                            'text' => 'Employee Training Sessions',
+                            'icon' => 'fas fa-fw fa-briefcase',
+                            'icon_color' => 'teal',
+                            'url' => '/pages/admin/training/employeeTrainingSessions/index'
+                        ]
+                    ]
+                ]
+            ]
+        ],
         'EMPLOYEE MANAGEMENT',
         [
             'text'    => 'Employees',
             'icon'    => 'fas fa-fw fa-users',
+            'icon_color' => 'indigo',
             'submenu' => [
                 [
                     'text' => 'Employees',
-                    'url'  => '/pages/employees/employee',
+                    'url'  => '/pages/employees/employee/',
                     'icon'    => 'fas fa-fw fa-users',
+                    'icon_color' => 'indigo',
                 ],
                 [
                     'text' => 'Employee History',
                     'url'  => '/pages/employee/employee_history/',
                     'icon'    => 'fas fa-fw fa-history',
+                    'icon_color' => 'indigo',
                 ],
                 [
                     'text' => 'HR Form',
                     'url'  => '/pages/employee/hr_form/',
                     'icon'    => 'fas fa-fw fa-folder',
+                    'icon_color' => 'indigo',
                 ],
                 [
                     'text' => 'Itenerary Request',
                     'url'  => '/pages/employee/itenerary_request/',
                     'icon'    => 'fas fa-fw fa-plane-departure',
+                    'icon_color' => 'indigo',
                 ],
                 [
                     'text' => 'Monitor Attendance',
                     'url'  => '/pages/employee/monitor_attendance/',
                     'icon'    => 'fas fa-fw fa-clock',
+                    'icon_color' => 'indigo',
                 ],
                 [
                     'text' => 'Performance Review',
                     'url'  => '/pages/employee/performance_review/',
                     'icon'    => 'fas fa-fw fa-chart-bar',
+                    'icon_color' => 'indigo',
                 ],
                 [
                     'text' => 'Document Management',
                     'url'  => '/pages/employee/document_management/',
                     'icon'    => 'fas fa-fw fa-file',
+                    'icon_color' => 'indigo',
                 ],
             ],
         ],
         'RECRUITMENT MANAGEMENT',
         [
             'text'    => 'Recruitment',
-            'icon' => 'fas fa-fw fa-random',
+            'icon' => 'fas fa-fw fa-th',
+            'icon_color' => 'red',
             'submenu' => [
                 [
                     'text'    => 'Recruitment Setup',
                     'url'     => '#',
-                    'icon'    => 'fas fa-fw fa-cogs',
+                    'icon'    => 'fas fa-fw fa-random',
+                    'icon_color' => 'red',
                     'submenu' => [
                         [
                             'text'    => 'Benefits',
                             'url'     => '/pages/recruitment/recruitmentSetup/benefits/index',
-                            'icon' => 'fas fa-fw fa-gifts',
+                            'icon'    => 'fas fa-fw fa-random',
+                            'icon_color' => 'orange',
                         ],
                         [
                             'text' => 'Education Levels',
                             'url'  => '/pages/recruitment/recruitmentSetup/educationLevels/index',
-                            'icon' => 'fas fa-fw fa-university',
+                            'icon'    => 'fas fa-fw fa-random',
+                            'icon_color' => 'orange',
                         ],
                         [
                             'text' => 'Employment Types',
                             'url'  => '/pages/recruitment/recruitmentSetup/employmentTypes/index',
-                            'icon' => 'fas fa-fw fa-users',
+                            'icon'    => 'fas fa-fw fa-random',
+                            'icon_color' => 'orange',
                         ],
                         [
                             'text' => 'Experience Levels',
                             'url'  => '/pages/recruitment/recruitmentSetup/experienceLevels/index',
-                            'icon' => 'fas fa-fw fa-arrow-alt-circle-up',
+                            'icon'    => 'fas fa-fw fa-random',
+                            'icon_color' => 'orange',
                         ],
                         [
                             'text' => 'Job Functions',
                             'url'  => '/pages/recruitment/recruitmentSetup/jobFunctions/index',
-                            'icon' => 'fas fa-fw fa-users-cog',
+                            'icon'    => 'fas fa-fw fa-random',
+                            'icon_color' => 'orange',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Job Positions',
                     'url'  => '/pages/recruitment/jobPositions/index',
-                    'icon' => 'fas fa-fw fa-user-tie',
+                    'icon' => 'fas fa-fw fa-columns',
+                    'icon_color' => 'red',
                 ],
                 [
                     'text' => 'Candidates',
                     'url'  => '/pages/recruitment/candidates/index',
                     'icon' => 'fas fa-fw fa-user-friends',
+                    'icon_color' => 'red',
                 ],
             ],
         ],
@@ -370,12 +482,12 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],
