@@ -2,6 +2,11 @@
 @extends('adminlte::page')
 @section('title', 'HRIS | Recruitment Setup - Benefits')
 @section('content_header')
+<div class="row no-gutters">
+	<div class="col-12 offset-md-2 col-md-8 offset-xl-3 col-xl-6 page-title">
+		<h1>recruitment setup</h1>
+	</div>
+</div>
 @stop
 @section('content')
 <div class="row no-gutters">
@@ -11,24 +16,25 @@
 	    <p><i class="fas fa-fw fa-check-circle"></i>{{ $message }}</p>
 	</div>
 	@endif
-	<h1>Recruitment Setup</h1>
-	<div class="col-12 box">
-		<div class="box-title">
-			<h3>Benefits</h3>
-		</div>
-		<div class="box-add">
-			<a href="/pages/recruitment/recruitmentSetup/benefits/create">add <i class="fa fa-plus"></i></a>
+	<div class="col-12 offset-md-2 col-md-8 offset-xl-3 col-xl-6 box">
+		<div class="row no-gutters">
+			<div class="box-title">
+				<h3>Benefits</h3>
+			</div>
+			<div class="box-add">
+				<a href="/pages/recruitment/recruitmentSetup/benefits/create">add <i class="fa fa-plus"></i></a>
+			</div>
 		</div>
 		<div class="box-table">
 			@if ( count($benefits) > 0)
 			<div class="row no-gutters">
 				<div class="table-responsive">
-					<table class="table table-hover">
+					<table class="table table-hover table-bordered table-striped table-condensed">
 						<thead>
 							<tr>
-								<td>id</td>
-								<td>name</td>
-								<td>action</td>
+								<th>id</th>
+								<th>name</th>
+								<th>action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -50,11 +56,13 @@
 					</table>
 				</div>
 			</div>
+			@if($benefits->hasPages())
 			<div class="row no-gutters">
 				<div class="col-12 links">
 					{{ $benefits->links() }}
 				</div>
 			</div>
+			@endif
 			@else
 			<h5>No data available.</h5>
 			@endif
@@ -67,6 +75,5 @@
 @stop
 @section('js')
 <script>
-console.log('Hi!');
 </script>
 @stop

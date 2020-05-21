@@ -13,7 +13,7 @@ class CurrencySeeder extends Seeder
     {
 		DB::table('hris_currencies')->delete();
 
-		$currency = array('code' =>
+		$currency = array(
 			array('code' =>'AFN' , 'name' => 'Afghani', 'symbol' => '؋' ),
 			array('code' =>'ALL' , 'name' => 'Lek', 'symbol' => 'Lek' ),
 			array('code' =>'ANG' , 'name' => 'Netherlands Antillian Guilder', 'symbol' => 'ƒ' ),

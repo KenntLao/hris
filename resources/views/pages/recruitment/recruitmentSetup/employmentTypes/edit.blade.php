@@ -5,9 +5,8 @@
 @stop
 @section('content')
 <div class="row no-gutters">
-	<div class="col-12 offset-md-4 col-md-4 box">
+	<div class="offset-2 col-8 offset-md-4 col-md-4 box">
 		<h3>edit employment type</h3>
-		<a href="/pages/recruitment/recruitmentSetup/employmentTypes/index">Back</a>
 		<div class="form-box">
 			<form class="form-horizontal" method="post" action="/pages/recruitment/recruitmentSetup/employmentTypes/update/{{$employmentType->id}}">
 				@csrf
@@ -16,14 +15,8 @@
 					<label for="name">Name:</label>
 					<input class="form-control" type="text" name="name" value="{{ $employmentType->name }}" required>
 				</div>
-				<div class="row no-gutters">
-					<div class="col-6">
-						<button type="submit">submit</button>
-					</div>
-					<div class="col-6">
-						<a href="/pages/recruitment/recruitmentSetup/employmentTypes/index">Back</a>
-					</div>
-				</div>
+				<button type="submit">submit</button>
+				<a href="/pages/recruitment/recruitmentSetup/employmentTypes/index">Back</a>
 			</form>
 		</div>
 	</div>
