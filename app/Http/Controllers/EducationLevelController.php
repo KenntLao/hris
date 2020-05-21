@@ -7,6 +7,7 @@ use App\hris_education_levels;
 
 class EducationLevelController extends Controller
 {
+
     public function index()
     {   
         $educationLevels = hris_education_levels::all();

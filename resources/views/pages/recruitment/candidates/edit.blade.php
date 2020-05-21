@@ -18,13 +18,13 @@
 						<div class="form-group">
 							<label for="position_applied">Position Applied: <span>*</span></label>
 							@if (count($jobPositions) > 0)
-							<select class="form-control" name="position_applied" required>
+							<select class="form-control select2" name="position_applied" required>
 								@foreach($jobPositions as $jobPosition)
 								<option value='{{$jobPosition->job_title}}' {{ $jobPosition->job_title == $candidate->position_applied  ? 'selected' : '' }}>{{$jobPosition->job_title}}</option>
 								@endforeach
 							</select>
 							@else
-							<select class="form-control" name="position_applied" required>
+							<select class="form-control select2" name="position_applied" required>
 								<option value="None">None</option>
 							</select>
 							@endif
@@ -33,7 +33,7 @@
 					<div class="col-6">
 						<div class="form-group">
 							<label for="hiring_stage">Hiring Stage: <span>*</span></label>
-							<select class="form-control" name="hiring_stage" required>
+							<select class="form-control select2" name="hiring_stage" required>
 								<option value="Sourced">Sourced</option>
 								<option value="Hired">Hired</option>
 								<option value="Archived">Archived</option>
@@ -76,10 +76,9 @@
 					<div class="col-6">
 						<div class="form-group">
 							<label for="gender">Gender: <span>*</span></label>
-							<select class="form-control" name="gender" required>
-								<option value="Female">Female</option>
-								<option value="Male">Male</option>
-								<option value="{{ $candidate->gender }}">{{ $candidate->gender }}</option>
+							<select class="form-control select2" name="gender" required>
+								<option value="Female" {{ $candidate->gender == 'Female'  ? 'selected' : '' }}>Female</option>
+								<option value="Male" {{ $candidate->gender == 'Male'  ? 'selected' : '' }}>Male</option>
 							</select>
 						</div>
 					</div>
@@ -94,7 +93,7 @@
 					<div class="col-6">
 						<div class="form-group">
 							<label for="country">Country: <span>*</span></label>
-							<select class="form-control" name="country" required>
+							<select class="form-control select2" name="country" required>
 								@foreach($countries as $country)
 								<option value='{{$country->name}}' {{ $candidate->country == $country->name  ? 'selected' : '' }}>{{$country->name}}</option>
 								@endforeach
